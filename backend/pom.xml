@@ -67,8 +67,12 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.lostfound.backend.BackendApplication</mainClass>
+                </configuration>
             </plugin>
         </plugins>
+
     </build>
 
 </project>
