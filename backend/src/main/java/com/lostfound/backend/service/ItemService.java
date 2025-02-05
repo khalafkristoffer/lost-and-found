@@ -2,19 +2,21 @@ package com.lostfound.backend.service;
 
 import com.lostfound.backend.model.Item;
 import com.lostfound.backend.repository.ItemRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 // Handles business logic for items
-
 @Service
 public class ItemService {
 
-    @Autowired
-    private ItemRepository itemRepository;
+    private final ItemRepository itemRepository;
+
+
+    public ItemService(ItemRepository itemRepository, com.lostfound.backend.service.ImageProcessingService imageProcessingService) {
+        this.itemRepository = itemRepository;
+    }
 
     // Get all items
     public List<Item> getAllItems() {
@@ -32,12 +34,12 @@ public class ItemService {
     }
 
     // Add a new item
-    public Item addItem(Item item) {
+    public Item addItem(Item item, byte[] bytes) {
         return itemRepository.save(item);
     }
 
-    // Delete an item by ID
     public void deleteItem(Long id) {
         itemRepository.deleteById(id);
     }
+
 }

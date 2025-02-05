@@ -2,46 +2,44 @@ package com.lostfound.backend.controller;
 
 import com.lostfound.backend.model.Item;
 import com.lostfound.backend.service.ItemService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-// Handles API requests for items
-
 @RestController
 @RequestMapping("/api/items")
+@RequiredArgsConstructor
 public class ItemController {
 
-    @Autowired
-    private ItemService itemService;
+    private final ItemService itemService;
 
-    // Get all items
     @GetMapping
     public List<Item> getAllItems() {
         return itemService.getAllItems();
     }
 
-    // Get item by ID
     @GetMapping("/{id}")
     public Optional<Item> getItemById(@PathVariable Long id) {
         return itemService.getItemById(id);
     }
 
-    // Search items by tags
     @GetMapping("/search")
     public List<Item> searchItemsByTags(@RequestParam String tags) {
         return itemService.searchItemsByTags(tags);
     }
 
-    // Add a new item
-    @PostMapping
-    public Item addItem(@RequestBody Item item) {
-        return itemService.addItem(item);
+    @PostMapping("/upload")
+    public Item addItem(@RequestParam("title") String title,
+                        @RequestParam("file") MultipartFile file) throws IOException {
+        Item item = new Item();
+        item.setTitle(title);
+        return itemService.addItem(item, file.getBytes());
     }
 
-    // Delete an item by ID
     @DeleteMapping("/{id}")
     public void deleteItem(@PathVariable Long id) {
         itemService.deleteItem(id);
