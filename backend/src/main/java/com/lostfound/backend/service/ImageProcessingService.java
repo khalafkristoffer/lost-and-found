@@ -73,7 +73,7 @@ public class ImageProcessingService {
                 .boxed()
                 .sorted((i, j) -> Float.compare(probabilities[0][j], probabilities[0][i]))
                 .limit(5)
-                .collect(Collectors.toList());
+                .toList();
 
         // Map the indices to human-readable labels.
         return topLabels.stream().map(this::imagenetLabel).collect(Collectors.toList());

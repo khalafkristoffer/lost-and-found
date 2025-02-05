@@ -3,7 +3,6 @@ package com.lostfound.backend.service;
 import com.lostfound.backend.model.Item;
 import com.lostfound.backend.repository.ItemRepository;
 import org.springframework.stereotype.Service;
-import com.lostfound.backend.service.ImageProcessingService;
 
 import java.util.List;
 import java.util.Optional;
