@@ -1,12 +1,14 @@
 package com.lostfound.backend.model;
 
 import jakarta.persistence.*;
-
-import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
 // johannes-metoden?
 
 @Entity
+@Getter
+@Setter
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +19,10 @@ public class Item {
     private String tags;
     private String location;
     private boolean isFound;
+    // byte handling
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] image;
 
     // Get and Set methods
     public Long getId() {

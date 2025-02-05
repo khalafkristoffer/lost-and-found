@@ -3,6 +3,7 @@ package com.lostfound.backend.service;
 import com.lostfound.backend.model.Item;
 import com.lostfound.backend.repository.ItemRepository;
 import org.springframework.stereotype.Service;
+import com.lostfound.backend.service.ImageProcessingService;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +15,7 @@ public class ItemService {
     private final ItemRepository itemRepository;
 
 
-    public ItemService(ItemRepository itemRepository, com.lostfound.backend.service.ImageProcessingService imageProcessingService) {
+    public ItemService(ItemRepository itemRepository) {
         this.itemRepository = itemRepository;
     }
 
@@ -34,9 +35,14 @@ public class ItemService {
     }
 
     // Add a new item
-    public Item addItem(Item item, byte[] bytes) {
+    public Item addItem(Item item, byte[] imageData) {
+        ImageProcessingService imageProcessingService = new ImageProcessingService();
+        List<String> generatedTags = imageProcessingService.generateTags(imageData);
+        item.setTags(String.join(",", generatedTags));
+        item.setImage(imageData);
         return itemRepository.save(item);
     }
+
 
     public void deleteItem(Long id) {
         itemRepository.deleteById(id);
