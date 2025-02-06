@@ -10,6 +10,8 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.FloatBuffer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -18,6 +20,12 @@ import java.util.stream.IntStream;
 public class ImageProcessingService {
 
     private static final String MODEL_PATH = "src/main/resources/mobilenet_v2.pb";
+    private List<String> labels;
+
+    public ImageProcessingService() throws IOException {
+        // Load labels from a file
+        labels = Files.lines(Paths.get("path/to/imagenet_labels.txt")).collect(Collectors.toList());
+    }
 
     public List<String> generateTags(byte[] imageData) {
         // Use try-with-resources so that all resources are closed automatically.
@@ -33,8 +41,8 @@ public class ImageProcessingService {
                     .get(0);
 
             return processOutput(outputTensor);
-        } catch (Exception e) {
-            throw new RuntimeException("Error processing image", e);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to process image", e);
         }
     }
 
@@ -73,18 +81,13 @@ public class ImageProcessingService {
                 .boxed()
                 .sorted((i, j) -> Float.compare(probabilities[0][j], probabilities[0][i]))
                 .limit(5)
-                .toList();
+                .collect(Collectors.toList());
 
         // Map the indices to human-readable labels.
         return topLabels.stream().map(this::imagenetLabel).collect(Collectors.toList());
     }
 
     private String imagenetLabel(int index) {
-        // Dummy labels; replace later or change method to probabilistic? idk yet
-        String[] labels = {
-                "wallet", "keys", "phone", "laptop", "watch",
-                "glasses", "bag", "bottle", "umbrella", "headphones"
-        };
-        return labels[index % labels.length];
+        return labels.get(index);
     }
 }

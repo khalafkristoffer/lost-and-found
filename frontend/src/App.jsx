@@ -1,35 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import  { useState } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import './App.css';
+import LandingPage from './LandingPage';
 
-function App() {
-  const [count, setCount] = useState(0)
+function SearchPage() {
+  const [prompt, setPrompt] = useState('');
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Here you would typically send the prompt to the backend for processing
+    console.log('Submitted prompt:', prompt);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://google.com" target="_blank">
-          <img src={viteLogo} className="logo vite" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App">
+      <header className="App-header">
+        <h1>Lost and Found</h1>
+        <p>Enter a description of the lost item to search for it.</p>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+            placeholder="Describe the lost item..."
+            required
+          />
+          <button type="submit">Search</button>
+        </form>
+      </header>
+    </div>
+  );
 }
 
-export default App
+function App() {
+  return (
+    <Router>
+      <Switch>
+        <Route path="/search" component={SearchPage} />
+        <Route path="/" component={LandingPage} />
+      </Switch>
+    </Router>
+  );
+}
+
+export default App;

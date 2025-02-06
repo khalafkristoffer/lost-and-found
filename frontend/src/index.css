@@ -1,11 +1,16 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --beige: #f5f5dc;
+  --dark-blue: #2c3e50;
+  --light-blue: #3498db;
+  --white: #ffffff;
+
+  font-family: Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--dark-blue);
+  background-color: var(--beige);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,19 +20,21 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  color: var(--light-blue);
+  text-decoration: none;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--dark-blue);
 }
 
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  align-items: center;
+  justify-content: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--beige);
 }
 
 h1 {
@@ -52,6 +59,35 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.landing-page {
+  text-align: center;
+}
+
+.landing-page h1 {
+  font-size: 3rem;
+  color: var(--dark-blue);
+}
+
+.landing-page p {
+  font-size: 1.5rem;
+  color: var(--light-blue);
+}
+
+.landing-page button {
+  padding: 15px 30px;
+  font-size: 1.5rem;
+  background-color: var(--light-blue);
+  color: var(--white);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.landing-page button:hover {
+  background-color: var(--dark-blue);
 }
 
 @media (prefers-color-scheme: light) {

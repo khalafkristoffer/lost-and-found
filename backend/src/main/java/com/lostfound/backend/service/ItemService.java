@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.io.IOException;
 
 // Handles business logic for items
 @Service
@@ -34,7 +35,7 @@ public class ItemService {
     }
 
     // Add a new item
-    public Item addItem(Item item, byte[] imageData) {
+    public Item addItem(Item item, byte[] imageData) throws IOException {
         ImageProcessingService imageProcessingService = new ImageProcessingService();
         List<String> generatedTags = imageProcessingService.generateTags(imageData);
         item.setTags(String.join(",", generatedTags));

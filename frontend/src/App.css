@@ -1,3 +1,20 @@
+:root {
+  --beige: #f5f5dc;
+  --dark-blue: #2c3e50;
+  --light-blue: #3498db;
+  --white: #ffffff;
+}
+
+body {
+  margin: 0;
+  background-color: var(--beige);
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -39,4 +56,59 @@
 
 .read-the-docs {
   color: #444;
+}
+
+.App {
+  text-align: center;
+  color: var(--dark-blue);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.App-header {
+  background-color: var(--dark-blue);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: var(--white);
+}
+
+p {
+  color: var(--light-blue);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input {
+  padding: 10px;
+  margin: 10px;
+  font-size: 16px;
+  width: 300px;
+  border: 2px solid var(--dark-blue);
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: var(--light-blue);
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--dark-blue);
 }

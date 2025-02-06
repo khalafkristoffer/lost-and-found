@@ -6,6 +6,7 @@ import lombok.Setter;
 
 // johannes-metoden?
 
+@SuppressWarnings("ALL")
 @Entity
 @Getter
 @Setter
