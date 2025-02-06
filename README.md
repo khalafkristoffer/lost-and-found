@@ -1,7 +1,10 @@
-# lost-and-found
+# Lost & Found
+Upload lost items into a database, and search for them using "AI".
 
+- [Description](#description)
+- [License](#license)
 
-# web-app to find lost items by using ml to categorize and identify items
+## Description
 
+Web-App built in React And SpringBoot, using MobileNETV2
 
-# unfinished
