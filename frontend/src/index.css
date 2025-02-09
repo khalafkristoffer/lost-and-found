@@ -102,3 +102,10 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.button-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
